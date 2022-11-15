@@ -1,0 +1,9 @@
+1. Create classlib w/ repository
+2. Create new cosole w/ UI - both classlib and UI exist in same directory
+3. Add UI reference to repository
+4. go bacvk to parent dir (Challenge_1)
+5. new testing unit (dotnet new xunit - remember leave namespace. )
+6. build test for just repository
+7. back to parent dir
+8. add reference to the test.
+9.yo remember to create new sln for the gold badge
