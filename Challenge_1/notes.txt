@@ -7,3 +7,27 @@
 7. back to parent dir
 8. add reference to the test.
 9.yo remember to create new sln for the gold badge
+Challenge 1: Cafe
+Komodo Café
+Komodo café is getting a new menu. The manager needs to be able to create new menu items,
+update menu items, delete existing menu items, as well as display a list of all items on the cafe's menu.
+
+You will be creating a Console Application as well as utilizing the Repository Pattern. 
+All functionality in the repository will need unit test coverage.
+
+ 
+
+The Menu Items:
+A unique meal number, so customers can say 
+"I'll have the #5"
+A meal name
+A description
+A list of ingredients
+A price
+ 
+
+Your Task:
+Create a Class for the menu items with properties, constructors, and fields.
+Create a Class for the repository that houses the required methods.
+Create a Test Class with coverage for your entire repository functionality.
+Create a Program file that allows the café manager to add, delete, and see all items in the menu list.

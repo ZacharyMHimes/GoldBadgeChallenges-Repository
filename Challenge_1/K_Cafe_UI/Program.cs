@@ -1,2 +1,2 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿K_Cafe_UI UI = new K_Cafe_UI();
+UI.Run();
