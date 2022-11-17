@@ -85,7 +85,8 @@ private void ListEntreeItems()
 private void DisplayEntrees(List<EntreeItem_A_La_Cart> entrees)
     {   
         foreach (var item in entrees)
-                    {WriteLine($"{item.MenuItem_ID}{item.MenuItem_Name}{item.MenuItem_Description}{item.MenuItem_Price}");}
+                    {WriteLine($"{item.MenuItem_ID} . {item.MenuItem_Name}  \n"
+                            +$"{item.MenuItem_Description} . {item.MenuItem_Price} \n");}
         ReadKey();
     }
 
@@ -98,7 +99,7 @@ private void ListDrinkItems()
 private void DisplayDrinks(List<Drinks_A_La_Cart> drinks)
     {
         foreach (var item in drinks)
-                {WriteLine($"{item.MenuItem_ID}{item.MenuItem_Name}{item.MenuItem_Price}");}
+                {WriteLine($"{item.MenuItem_ID} . {item.MenuItem_Name} . {item.MenuItem_Price}");}
         ReadKey();
     }
 private void ListSideItems()
@@ -109,7 +110,7 @@ private void ListSideItems()
 private void DisplaySides(List<AddOns_A_La_Cart> sides)
     {
         foreach (var item in sides)
-                {WriteLine($"{item.MenuItem_ID}{item.MenuItem_Name}{item.MenuItem_Price}");}
+                {WriteLine($"{item.MenuItem_ID} . {item.MenuItem_Name} . {item.MenuItem_Price}");}
         ReadKey();
     }
 
