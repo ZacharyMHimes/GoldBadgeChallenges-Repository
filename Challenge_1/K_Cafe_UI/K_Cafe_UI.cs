@@ -1,6 +1,13 @@
+using System.Runtime.CompilerServices;
 using static System.Console;
 public class K_Cafe_UI
 {
+    public K_Cafe_UI()
+    {
+        _menuRepo = new Menu_Repository();
+    }
+    private Menu_Repository _menuRepo;
+
 public bool isRunning = true; 
 public void Run()
     {   while (isRunning == true)
@@ -37,21 +44,21 @@ private void RunApplication()
                 case "1":
                     
                     Console.Clear();
-                    //listEntreeItems();
+                    ListEntreeItems();
                     break;
                 case "2":
                     
                     Console.Clear();
-                    //listDrinkItems();
+                    ListDrinkItems();
                     break;
                 case "3":
                     
                     Console.Clear();
-                    //listSideItems();
+                    ListSideItems();
                     break;
                 case "6":
                     Console.Clear();
-                    _runupdateMenuUI.Run(); //Update Menu (add / remove entree, drink, sides )
+                    //_runupdateMenuUI.Run(); //Update Menu (add / remove entree, drink, sides )
                     break;
                 case "7":
                     Console.Clear();
@@ -68,6 +75,42 @@ private void RunApplication()
                     ReadLine();
                     break;
             }
-    
     }
+
+private void ListEntreeItems()
+    {
+        List<EntreeItem_A_La_Cart> entree = _menuRepo.GetAllEntrees();
+        DisplayEntrees(_menuRepo.GetAllEntrees());
+    }
+private void DisplayEntrees(List<EntreeItem_A_La_Cart> entrees)
+    {   
+        foreach (var item in entrees)
+                    {WriteLine($"{item.MenuItem_ID}{item.MenuItem_Name}{item.MenuItem_Description}{item.MenuItem_Price}");}
+        ReadKey();
+    }
+
+private void ListDrinkItems()
+    {
+        List<Drinks_A_La_Cart> drink = _menuRepo.GetAllDrinks();
+        DisplayDrinks(_menuRepo.GetAllDrinks());
+    }
+
+private void DisplayDrinks(List<Drinks_A_La_Cart> drinks)
+    {
+        foreach (var item in drinks)
+                {WriteLine($"{item.MenuItem_ID}{item.MenuItem_Name}{item.MenuItem_Price}");}
+        ReadKey();
+    }
+private void ListSideItems()
+    {
+        List<AddOns_A_La_Cart> side = _menuRepo.GetAllSides();
+        DisplaySides(_menuRepo.GetAllSides());
+    }
+private void DisplaySides(List<AddOns_A_La_Cart> sides)
+    {
+        foreach (var item in sides)
+                {WriteLine($"{item.MenuItem_ID}{item.MenuItem_Name}{item.MenuItem_Price}");}
+        ReadKey();
+    }
+
 }

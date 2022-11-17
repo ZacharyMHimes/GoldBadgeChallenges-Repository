@@ -1,5 +1,4 @@
-namespace K_CafeData
-{
+
     public class Drinks_A_La_Cart
     {
     public Drinks_A_La_Cart
@@ -16,4 +15,3 @@ namespace K_CafeData
 public string MenuItem_Name {get; set;} // a la cart item number
 public double MenuItem_Price {get; set;} // cost of menu item a la cart
     }
-}

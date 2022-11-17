@@ -1,4 +1,4 @@
-﻿namespace K_CafeData;
+﻿
 public class EntreeItem_A_La_Cart
 {
         public EntreeItem_A_La_Cart
@@ -12,7 +12,7 @@ public class EntreeItem_A_La_Cart
             MenuItem_Price = menuItem_Price;
         }
 
-        public int MenuItem_ID {get; set;} // A la cart food number
+public int MenuItem_ID {get; set;} // A la cart food number
 public string MenuItem_Name {get; set;} // a la cart item number
 public string MenuItem_Description {get; set;} // string description of food
 
