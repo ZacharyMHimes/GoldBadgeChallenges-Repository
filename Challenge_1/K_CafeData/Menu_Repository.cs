@@ -3,7 +3,7 @@ using static System.Console;
     public class Menu_Repository
     {
     private readonly List<EntreeItem_A_La_Cart> _EntreeDb = new List<EntreeItem_A_La_Cart>();
-    private int _comboCount;
+    private int _entreeCount;
     private readonly List<AddOns_A_La_Cart> _AddOnsDb = new List<AddOns_A_La_Cart>();
     private int _addOnsCount;
 
@@ -26,8 +26,8 @@ public bool AddMenuItemEntree(EntreeItem_A_La_Cart entree)
 
 public bool AddEntreeToDatabase(EntreeItem_A_La_Cart entree)
     {
-        _comboCount++;
-        entree.MenuItem_ID=_comboCount;
+        _entreeCount++;
+        entree.MenuItem_ID=_entreeCount;
         _EntreeDb.Add(entree);
         return true;
     }
@@ -76,16 +76,16 @@ public List<AddOns_A_La_Cart> GetAllSides()
     }
     private void SeedData()
     {
-        var entree1 = new EntreeItem_A_La_Cart(_comboCount, "== Komodo Burger ==","8 oz. Patty, grilled onions, pineapple, garlic aoli.", 5.99);
-        var entree2 = new EntreeItem_A_La_Cart(_comboCount, "== Komodo Double ==","Two 8 oz. Patties, grilled onions, pineapple, garlic aoli.", 7.99);
-        var entree3 = new EntreeItem_A_La_Cart(_comboCount, "== Komodo Triple ==","Three 8 oz. Patties, grilled onions, pineapple, garlic aoli. (Not available to employees carried on company health insurance)", 9.99);
+        var entree1 = new EntreeItem_A_La_Cart( "== Komodo Burger ==","8 oz. Patty, grilled onions, pineapple, garlic aoli.", 5.99);
+        var entree2 = new EntreeItem_A_La_Cart( "== Komodo Double ==","Two 8 oz. Patties, grilled onions, pineapple, garlic aoli.", 7.99);
+        var entree3 = new EntreeItem_A_La_Cart( "== Komodo Triple ==","Three 8 oz. Patties, grilled onions, pineapple, garlic aoli. (Not available to employees carried on company health insurance)", 9.99);
 
-        var entree4 = new EntreeItem_A_La_Cart(_comboCount, "== Dragon Burger ==","8 oz. Patty, Carolina Reaper Bacon Honey Remolade, Garden Fixings, Pepto-Bismol drizzle ", 7.99);
+        var entree4 = new EntreeItem_A_La_Cart( "== Dragon Burger ==","8 oz. Patty, Carolina Reaper Bacon Honey Remolade, Garden Fixings, Pepto-Bismol drizzle ", 7.99);
 
-        var entree5 = new EntreeItem_A_La_Cart(_comboCount, "== 3 piece Lizard Fingers ==","3 piece all-grey meat Chicken Tenders - choice of sauce", 4.99);
-        var entree6 = new EntreeItem_A_La_Cart(_comboCount, "== 5 piece Lizard Fingers ==","5 piece all-grey meat Chicken Tenders - choice of sauce", 6.99);
-        var entree7 = new EntreeItem_A_La_Cart(_comboCount, "== Actual Komodo Dragon ==","Char-grilled Komodo Dragon steak, market priced", 0.00);  //secret menu easter egg? lol
-        var entree8 = new EntreeItem_A_La_Cart(_comboCount, "== Veggie Burger ==","Sub Single Komodo or Dragon for Veggie Patty", 6.99);
+        var entree5 = new EntreeItem_A_La_Cart( "== 3 piece Lizard Fingers ==","3 piece all-grey meat Chicken Tenders - choice of sauce", 4.99);
+        var entree6 = new EntreeItem_A_La_Cart( "== 5 piece Lizard Fingers ==","5 piece all-grey meat Chicken Tenders - choice of sauce", 6.99);
+        var entree7 = new EntreeItem_A_La_Cart( "== Actual Komodo Dragon ==","Char-grilled Komodo Dragon steak, market priced", 0.00);  //secret menu easter egg? lol
+        var entree8 = new EntreeItem_A_La_Cart( "== Veggie Burger ==","Sub Single Komodo or Dragon for Veggie Patty", 6.99);
 
         AddMenuItemEntree(entree1);
         AddMenuItemEntree(entree2);

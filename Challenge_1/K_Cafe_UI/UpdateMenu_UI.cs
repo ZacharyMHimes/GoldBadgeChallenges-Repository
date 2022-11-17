@@ -3,6 +3,11 @@ using static System.Console;
 public class UpdateMenu_UI
 {   
 private bool isUpdateUI;
+private Menu_Repository _menuRepo;
+public UpdateMenu_UI()
+        {
+            _menuRepo = new Menu_Repository();
+        }
 public void Run()
         {
             OpenUpdateMenu();
@@ -104,15 +109,54 @@ private void AddAnItem()
                     break;
             }
         }
-
 private void AddNewEntree()
     {
-        Clear();
+
+        EntreeItem_A_La_Cart entree = EntreeInput();
+            if (_menuRepo.AddMenuItemEntree(entree))
+            {
+                System.Console.WriteLine($"Entree Menu Updated to include {entree.MenuItem_Name} ");
+                ReadKey();
+            }
+            else
+            { 
+                System.Console.WriteLine("Unable to add new item.");
+                ReadKey();
+            }
+    }
+private EntreeItem_A_La_Cart EntreeInput()
+
+        {Clear();
         ForegroundColor = ConsoleColor.DarkGreen;
         WriteLine("\n" 
             + "                                                                                                                \n" 
             + "                                   Komodo Insurance Cafe Menu Management Application                              ");  Console.ForegroundColor = ConsoleColor.DarkYellow;System.Console.WriteLine(
             "                                                    Update Menu Options                                            \n"); 
         ResetColor();      
+        EntreeItem_A_La_Cart entree = new EntreeItem_A_La_Cart();
+        
+        ForegroundColor = ConsoleColor.DarkMagenta;
+        WriteLine("Enter a Name for the new Entree:");
+        ResetColor();
+        entree.MenuItem_Name = ReadLine();
+        
+        ForegroundColor = ConsoleColor.DarkMagenta;
+        WriteLine("Enter a short description for the new Entree:");
+        ResetColor();
+        entree.MenuItem_Description = ReadLine();
+
+        ForegroundColor = ConsoleColor.DarkMagenta;
+        WriteLine("Enter a price (0.00) for the new Entree:");
+        ResetColor();
+
+		string userInput;
+        double doubleVal;
+        
+        userInput = Console.ReadLine();
+        doubleVal = Convert.ToDouble(userInput);
+        entree.MenuItem_Price = doubleVal;
+        
+        return entree;
+
     }
 }

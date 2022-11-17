@@ -5,8 +5,11 @@ public class K_Cafe_UI
     public K_Cafe_UI()
     {
         _menuRepo = new Menu_Repository();
+        _runUpdateMenu_UI = new UpdateMenu_UI();
     }
+    
     private Menu_Repository _menuRepo;
+    private UpdateMenu_UI _runUpdateMenu_UI;
 
 public bool isRunning = true; 
 public void Run()
@@ -58,7 +61,7 @@ private void RunApplication()
                     break;
                 case "6":
                     Console.Clear();
-                    //_runupdateMenuUI.Run(); //Update Menu (add / remove entree, drink, sides )
+                    _runUpdateMenu_UI.Run();
                     break;
                 case "7":
                     Console.Clear();
