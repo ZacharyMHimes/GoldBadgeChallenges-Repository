@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using static System.Console;
 
     public class Menu_Repository
@@ -6,17 +7,15 @@ using static System.Console;
     private int _entreeCount;
     private readonly List<AddOns_A_La_Cart> _AddOnsDb = new List<AddOns_A_La_Cart>();
     private int _addOnsCount;
-
     private readonly List<Drinks_A_La_Cart> _DrinksDb = new List<Drinks_A_La_Cart>();
     private int _drinksCount;
-
     public Menu_Repository _menuRepo;
     public Menu_Repository()
         {
             SeedData();
         }
 
-//C.R.U.D -> Create, Read , Update , and Delete
+//C.R.U.D -> Create, Read , Update , Delete
 
 //todo CREATE METHODs
 public bool AddMenuItemEntree(EntreeItem_A_La_Cart entree)
@@ -32,12 +31,12 @@ public bool AddEntreeToDatabase(EntreeItem_A_La_Cart entree)
         return true;
     }
 
-public bool AddMenuItemOneOff(AddOns_A_La_Cart item)
+public bool AddMenuItemSide(AddOns_A_La_Cart item)
     {
-        return (item is null) ? false : AddOneOffToDatabase(item);
+        return (item is null) ? false : AddSideToDatabase(item);
     }
 
-public bool AddOneOffToDatabase(AddOns_A_La_Cart item)
+public bool AddSideToDatabase(AddOns_A_La_Cart item)
     {
         _addOnsCount++;
         item.MenuItem_ID=_addOnsCount;
@@ -61,10 +60,21 @@ public bool AddDrinkDatabase(Drinks_A_La_Cart drink)
 
 //todo READ METHODs
 
-//* Read GetAll:
 public List<EntreeItem_A_La_Cart> GetAllEntrees()
     {
         return _EntreeDb;
+    }
+
+public EntreeItem_A_La_Cart GetEntreeByName(string searchName)
+    {
+        foreach (var entree  in _EntreeDb)
+        {
+            if (entree.MenuItem_Name == searchName)
+            {
+                return entree;
+            }
+        }
+        return null;                   
     }
 public List<Drinks_A_La_Cart> GetAllDrinks()
     {
@@ -74,7 +84,46 @@ public List<AddOns_A_La_Cart> GetAllSides()
     {
         return _AddOnsDb;
     }
-    private void SeedData()
+
+//todo UPDATE METHODs
+public bool UpdateExistingEntree(string searchName, EntreeItem_A_La_Cart updatedEntree)
+    {
+        EntreeItem_A_La_Cart oldEntree = GetEntreeByName(searchName);
+
+        if (oldEntree != null)
+        {   oldEntree.MenuItem_ID = updatedEntree.MenuItem_ID;
+            oldEntree.MenuItem_Name = updatedEntree.MenuItem_Name;
+            oldEntree.MenuItem_Description = updatedEntree.MenuItem_Description;
+            oldEntree.MenuItem_Price = updatedEntree.MenuItem_Price;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+//todo DELETE METHOD:
+public bool DeleteExistingEntree(EntreeItem_A_La_Cart existingEntree)
+    {
+        bool deleteResult = _EntreeDb.Remove(existingEntree); 
+        return deleteResult;                               
+    }                                                     
+
+public bool DeleteExistingDrink(Drinks_A_La_Cart existingDrink)
+    {
+        bool deleteResult = _DrinksDb.Remove(existingDrink); 
+        return deleteResult;                               
+    }  
+
+public bool DeleteExistingSide(AddOns_A_La_Cart existingSide)
+    {
+        bool deleteResult = _AddOnsDb.Remove(existingSide); 
+        return deleteResult;                               
+    }  
+
+//todo STORED DATA:
+private void SeedData()
     {
         var entree1 = new EntreeItem_A_La_Cart( "== Komodo Burger ==","8 oz. Patty, grilled onions, pineapple, garlic aoli.", 5.99);
         var entree2 = new EntreeItem_A_La_Cart( "== Komodo Double ==","Two 8 oz. Patties, grilled onions, pineapple, garlic aoli.", 7.99);
@@ -96,10 +145,10 @@ public List<AddOns_A_La_Cart> GetAllSides()
         AddMenuItemEntree(entree7);
         AddMenuItemEntree(entree8);
 
-        var drink1 = new Drinks_A_La_Cart(_drinksCount, "Small Drink", 1.99);
-        var drink2 = new Drinks_A_La_Cart(_drinksCount, "Medium Drink", 2.49);
-        var drink3 = new Drinks_A_La_Cart(_drinksCount, "Large Drink", 2.79);
-        var drink4 = new Drinks_A_La_Cart(_drinksCount, "World's largest Lizard", 2.99);
+        var drink1 = new Drinks_A_La_Cart(_drinksCount, "Small Drink", 2.39);
+        var drink2 = new Drinks_A_La_Cart(_drinksCount, "Medium Drink", 2.79);
+        var drink3 = new Drinks_A_La_Cart(_drinksCount, "Large Drink", 2.99);
+        var drink4 = new Drinks_A_La_Cart(_drinksCount, "World's largest Lizard", 3.49);
 
         AddMenuItemDrinks(drink1);
         AddMenuItemDrinks(drink2);
@@ -111,10 +160,10 @@ public List<AddOns_A_La_Cart> GetAllSides()
         var fry3 = new AddOns_A_La_Cart(_addOnsCount, "Large Fry", 1.99);
         var fry4 = new AddOns_A_La_Cart(_addOnsCount, "Apex Predator", 2.99);
 
-        AddMenuItemOneOff(fry1);
-        AddMenuItemOneOff(fry2);
-        AddMenuItemOneOff(fry3);
-        AddMenuItemOneOff(fry4);
+        AddMenuItemSide(fry1);
+        AddMenuItemSide(fry2);
+        AddMenuItemSide(fry3);
+        AddMenuItemSide(fry4);
     }
 
     }
