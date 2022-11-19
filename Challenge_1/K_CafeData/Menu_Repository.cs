@@ -58,13 +58,13 @@ public bool AddDrinkDatabase(Drinks_A_La_Cart drink)
     }
     
 
-//todo READ METHODs
+//todo READ METHODs 
+                    //* 3 Get All Methods, and 3 By Name helper methods
 
 public List<EntreeItem_A_La_Cart> GetAllEntrees()
     {
         return _EntreeDb;
     }
-
 public EntreeItem_A_La_Cart GetEntreeByName(string searchName)
     {
         foreach (var entree  in _EntreeDb)
@@ -76,15 +76,47 @@ public EntreeItem_A_La_Cart GetEntreeByName(string searchName)
         }
         return null;                   
     }
+public EntreeItem_A_La_Cart GetEntreeById(int searchId)
+    {
+        foreach (var entree  in _EntreeDb)
+        {
+            if (entree.MenuItem_ID == searchId)
+            {
+                return entree;
+            }
+        }
+        return null;                   
+    }
 public List<Drinks_A_La_Cart> GetAllDrinks()
     {
         return _DrinksDb;
+    }
+public Drinks_A_La_Cart GetDrinkByName(string searchName)
+    {
+        foreach (var drink in _DrinksDb)
+        {
+            if (drink.MenuItem_Name == searchName)
+            {
+                return drink;
+            }
+        }
+        return null;                   
     }
 public List<AddOns_A_La_Cart> GetAllSides()
     {
         return _AddOnsDb;
     }
-
+public AddOns_A_La_Cart GetSideByName(string searchName)
+    {
+        foreach (var side in _AddOnsDb)
+        {
+            if (side.MenuItem_Name == searchName)
+            {
+                return side;
+            }
+        }
+        return null;                   
+    }
 //todo UPDATE METHODs
 public bool UpdateExistingEntree(string searchName, EntreeItem_A_La_Cart updatedEntree)
     {
@@ -125,16 +157,14 @@ public bool DeleteExistingSide(AddOns_A_La_Cart existingSide)
 //todo STORED DATA:
 private void SeedData()
     {
-        var entree1 = new EntreeItem_A_La_Cart( "== Komodo Burger ==","8 oz. Patty, grilled onions, pineapple, garlic aoli.", 5.99);
-        var entree2 = new EntreeItem_A_La_Cart( "== Komodo Double ==","Two 8 oz. Patties, grilled onions, pineapple, garlic aoli.", 7.99);
-        var entree3 = new EntreeItem_A_La_Cart( "== Komodo Triple ==","Three 8 oz. Patties, grilled onions, pineapple, garlic aoli. (Not available to employees carried on company health insurance)", 9.99);
-
-        var entree4 = new EntreeItem_A_La_Cart( "== Dragon Burger ==","8 oz. Patty, Carolina Reaper Bacon Honey Remolade, Garden Fixings, Pepto-Bismol drizzle ", 7.99);
-
-        var entree5 = new EntreeItem_A_La_Cart( "== 3 piece Lizard Fingers ==","3 piece all-grey meat Chicken Tenders - choice of sauce", 4.99);
-        var entree6 = new EntreeItem_A_La_Cart( "== 5 piece Lizard Fingers ==","5 piece all-grey meat Chicken Tenders - choice of sauce", 6.99);
-        var entree7 = new EntreeItem_A_La_Cart( "== Actual Komodo Dragon ==","Char-grilled Komodo Dragon steak, market priced", 0.00);  //secret menu easter egg? lol
-        var entree8 = new EntreeItem_A_La_Cart( "== Veggie Burger ==","Sub Single Komodo or Dragon for Veggie Patty", 6.99);
+        var entree1 = new EntreeItem_A_La_Cart( "Komodo Burger","8 oz. Patty, grilled onions, pineapple, garlic aoli.", 5.99);
+        var entree2 = new EntreeItem_A_La_Cart( "Komodo Double","Two 8 oz. Patties, grilled onions, pineapple, garlic aoli.", 7.99);
+        var entree3 = new EntreeItem_A_La_Cart( "Komodo Triple","Three 8 oz. Patties, grilled onions, pineapple, garlic aoli. (Not available to employees carried on company health insurance)", 9.99);
+        var entree4 = new EntreeItem_A_La_Cart( "Dragon Burger😱🥵🧨🚽","8 oz. Patty, Carolina Reaper Bacon Honey Remolade, Garden Fixings, Pepto-Bismol drizzle ", 7.99);
+        var entree5 = new EntreeItem_A_La_Cart( "3 piece Lizard Fingers","3 piece all-grey meat Chicken Tenders - choice of sauce", 4.99);
+        var entree6 = new EntreeItem_A_La_Cart( "5 piece Lizard Fingers","5 piece all-grey meat Chicken Tenders - choice of sauce", 6.99);
+        var entree7 = new EntreeItem_A_La_Cart( "Actual Komodo Dragon","Char-grilled Komodo Dragon steak, market priced", 0.00);  //secret menu easter egg? lol
+        var entree8 = new EntreeItem_A_La_Cart( "Veggie Burger","Sub Single Komodo or Dragon for Veggie Patty", 6.99);
 
         AddMenuItemEntree(entree1);
         AddMenuItemEntree(entree2);
@@ -145,20 +175,20 @@ private void SeedData()
         AddMenuItemEntree(entree7);
         AddMenuItemEntree(entree8);
 
-        var drink1 = new Drinks_A_La_Cart(_drinksCount, "Small Drink", 2.39);
-        var drink2 = new Drinks_A_La_Cart(_drinksCount, "Medium Drink", 2.79);
-        var drink3 = new Drinks_A_La_Cart(_drinksCount, "Large Drink", 2.99);
-        var drink4 = new Drinks_A_La_Cart(_drinksCount, "World's largest Lizard", 3.49);
+        var drink1 = new Drinks_A_La_Cart( "Small Drink", 2.39);
+        var drink2 = new Drinks_A_La_Cart( "Medium Drink", 2.79);
+        var drink3 = new Drinks_A_La_Cart( "Large Drink", 2.99);
+        var drink4 = new Drinks_A_La_Cart( "World's largest Lizard", 3.49);
 
         AddMenuItemDrinks(drink1);
         AddMenuItemDrinks(drink2);
         AddMenuItemDrinks(drink3);
         AddMenuItemDrinks(drink4);
 
-        var fry1 = new AddOns_A_La_Cart(_addOnsCount, "Small Fry", 0.99);
-        var fry2 = new AddOns_A_La_Cart(_addOnsCount, "Medium Fry", 1.49);
-        var fry3 = new AddOns_A_La_Cart(_addOnsCount, "Large Fry", 1.99);
-        var fry4 = new AddOns_A_La_Cart(_addOnsCount, "Apex Predator", 2.99);
+        var fry1 = new AddOns_A_La_Cart( "Small Fry", 0.99);
+        var fry2 = new AddOns_A_La_Cart( "Medium Fry", 1.49);
+        var fry3 = new AddOns_A_La_Cart( "Large Fry", 1.99);
+        var fry4 = new AddOns_A_La_Cart( "Apex Predator", 2.99);
 
         AddMenuItemSide(fry1);
         AddMenuItemSide(fry2);

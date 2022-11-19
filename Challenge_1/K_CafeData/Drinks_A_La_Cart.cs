@@ -3,10 +3,9 @@
     {
     public Drinks_A_La_Cart
         (
-            int menuItem_ID, string menuItem_Name, double menuItem_Price
+            string menuItem_Name, double menuItem_Price
         ) 
         {
-            this.MenuItem_ID = menuItem_ID;
             this.MenuItem_Name = menuItem_Name;
             this.MenuItem_Price = menuItem_Price;
         }

@@ -24,7 +24,7 @@ private void CloseUpdateUI()
             Clear();
             isUpdateUI = false;
     }   
-
+// Main Update Menu
 private void ViewUpdateUI()
     {   Clear();
         ForegroundColor = ConsoleColor.DarkGreen;
@@ -35,11 +35,11 @@ private void ViewUpdateUI()
         ResetColor();                                                                                                              
         WriteLine("\n"
             + "                                                                                                                \n"
-            + "     1. Add An Item                                                                6. Add a Combo               \n"
+            + "     1. Add An Item                                                                 . ------------               \n"
             + "     2. Remove An Item                                                              . ------------              \n" 
-            + "     3. Edit Item                                                                   . ------------              \n" 
-            + "     4. -------------                                                               . ------------              \n" 
-            + "     5. -------------                                                             10. Back To Main              \n" 
+            + "     3. Edit Entrees                                                                . ------------              \n" 
+            + "      . -------------                                                               . ------------              \n" 
+            + "      . -------------                                                             10. Back To Main              \n" 
             + "                                                                                                                \n"); 
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             System.Console.WriteLine("\n"
@@ -72,7 +72,7 @@ private void ViewUpdateUI()
                     break;
             }
     }
-
+// Add an Item Menu
 private void AddAnItem()
         {
         Clear();
@@ -109,8 +109,8 @@ private void AddAnItem()
                     break;
             }
         }
-
-private void AddNewEntree()
+//* Add an Entree Methods   
+    private void AddNewEntree()
     {
 
         EntreeItem_A_La_Cart entree = EntreeInput();
@@ -125,7 +125,7 @@ private void AddNewEntree()
                 ReadKey();
             }
     }
-private EntreeItem_A_La_Cart EntreeInput()
+    private EntreeItem_A_La_Cart EntreeInput()
 {   try {
         Clear();
         ForegroundColor = ConsoleColor.DarkGreen;
@@ -165,7 +165,8 @@ private EntreeItem_A_La_Cart EntreeInput()
             }
 
     }
-private void AddNewDrink()
+//* Add a Drink Methods
+    private void AddNewDrink()
     {
 
         Drinks_A_La_Cart drink = DrinkInput();
@@ -180,7 +181,7 @@ private void AddNewDrink()
                 ReadKey();
             }
     }
-private Drinks_A_La_Cart DrinkInput()
+    private Drinks_A_La_Cart DrinkInput()
     { try{
         
             Clear();
@@ -214,8 +215,8 @@ private Drinks_A_La_Cart DrinkInput()
             return null;
             }
     }
-
-private void AddNewSide()
+//* Add a Side Methods
+    private void AddNewSide()
     {
 
         AddOns_A_La_Cart side = SideInput();
@@ -230,7 +231,7 @@ private void AddNewSide()
                 ReadKey();
             }
     }
-private AddOns_A_La_Cart SideInput()
+    private AddOns_A_La_Cart SideInput()
 {   try {
         Clear();
         ForegroundColor = ConsoleColor.DarkGreen;
@@ -265,7 +266,7 @@ private AddOns_A_La_Cart SideInput()
             }
 
     }
-
+//Remove an Item Menu
 private void RemoveAnItem()
         {
         Clear();
@@ -289,9 +290,9 @@ private void RemoveAnItem()
                     Clear();
                     break;
 
-                // case "2":
-                //     RemoveDrink(); //todo
-                //     break;
+                case "2":
+                    ListDrinksToDelete();
+                    break;
 
                 // case "3":
                 //     RemoveSide(); //todo
@@ -304,12 +305,13 @@ private void RemoveAnItem()
             }
         }
 
-private void ListEntreesToDelete()
+//* Remove Entree Methods
+    private void ListEntreesToDelete()
     {
         List<EntreeItem_A_La_Cart> entreesInDb = _menuRepo.GetAllEntrees();
         DisplayEntree_RemoveOptions(entreesInDb);
     }
-private void DisplayEntree_RemoveOptions(List<EntreeItem_A_La_Cart> entreesInDb)
+    private void DisplayEntree_RemoveOptions(List<EntreeItem_A_La_Cart> entreesInDb)
     {
         if (entreesInDb.Count > 0)
         {
@@ -329,7 +331,7 @@ private void DisplayEntree_RemoveOptions(List<EntreeItem_A_La_Cart> entreesInDb)
             Clear();
         }
     }
-private void RemoveAnEntree()
+    private void RemoveAnEntree()
     {
         try
         {            
@@ -347,8 +349,8 @@ private void RemoveAnEntree()
                 }
                 else
                 {
-                    WriteLine($"{item.MenuItem_Name} could not be deleted. \n."
-                                +"Try confirming this is the entree you are looking for.");
+                    WriteLine($"{item.MenuItem_Name} was not deleted. \n."
+                                +"Returning to menu navigation.");
                 }
             }
         }
@@ -361,6 +363,123 @@ private void RemoveAnEntree()
         ReadKey();
     }
 
+//* Remove Drink Methods
+    private void ListDrinksToDelete()
+    {
+        List<Drinks_A_La_Cart> drinksInDb = _menuRepo.GetAllDrinks();
+        DisplayDrinks_RemoveOptions(drinksInDb);
+    }
+    private void DisplayDrinks_RemoveOptions(List<Drinks_A_La_Cart> drinksInDb)
+    {
+        if (drinksInDb.Count > 0)
+        {
+            foreach (Drinks_A_La_Cart item in drinksInDb)
+            {
+            WriteLine($" {item.MenuItem_ID}  ===== {item.MenuItem_Name} =====  {item.MenuItem_Price}");
+            }
+            Console.ForegroundColor = ConsoleColor.DarkMagenta; 
+            WriteLine("Enter the name of the drink you want to remove");
+            ResetColor();
+            RemoveADrink();
+        }
+        else
+        {
+            WriteLine("No drinks Found. Press enter to return to menu.");
+            ReadKey();
+            Clear();
+        }
+    }
+    private void RemoveADrink()
+    {
+        try
+        {            
+            string usersearchName = (ReadLine());
+            Drinks_A_La_Cart item = _menuRepo.GetDrinkByName(usersearchName);
+            WriteLine($"Do you want to Delete this Item? \n"
+                    + "1. Yes \n" 
+                    + "2. No"  );
+            string userInputDeleteDrink = ReadLine();
+            if (userInputDeleteDrink == "1".ToLower())
+            {
+                if (_menuRepo.DeleteExistingDrink(item))
+                {
+                    WriteLine($"{item.MenuItem_ID} {item.MenuItem_Name} has been removed from menu.");
+                }
+                else
+                {
+                    WriteLine($"{item.MenuItem_Name} was not deleted. \n."
+                                +"Returning to menu navigation.");
+                }
+            }
+        }
+        catch
+        {
+                    WriteLine($"The menu item could not be deleted. \n."
+                                +"Try confirming this is the item you are looking for.");
+        }
+
+        ReadKey();
+    }
+//* Remove Side Methods
+    private void ListSidesToDelete()
+    {
+        List<AddOns_A_La_Cart> addOnsInDb = _menuRepo.GetAllSides();
+        DisplaySides_RemoveOptions(addOnsInDb);
+    }
+    private void DisplaySides_RemoveOptions(List<AddOns_A_La_Cart> addOnsInDb)
+    {
+        if (addOnsInDb.Count > 0)
+        {
+            foreach (AddOns_A_La_Cart item in addOnsInDb)
+            {
+            WriteLine($" {item.MenuItem_ID}  ===== {item.MenuItem_Name} =====  {item.MenuItem_Price}");
+            }
+            Console.ForegroundColor = ConsoleColor.DarkMagenta; 
+            WriteLine("Enter the name of the Side you want to remove");
+            ResetColor();
+            RemoveASide();
+        }
+        else
+        {
+            WriteLine("No drinks Found. Press enter to return to menu.");
+            ReadKey();
+            Clear();
+        }
+    }
+    private void RemoveASide()
+    {
+        try
+        {            
+            string usersearchName = (ReadLine());
+            AddOns_A_La_Cart item = _menuRepo.GetSideByName(usersearchName);
+            WriteLine($"Do you want to Delete this Item? \n"
+                    + "1. Yes \n" 
+                    + "2. No"  );
+            string userInputDeleteSide = ReadLine();
+            if (userInputDeleteSide == "1".ToLower())
+            {
+                if (_menuRepo.DeleteExistingSide(item))
+                {
+                    WriteLine($"{item.MenuItem_ID} {item.MenuItem_Name} has been removed from menu.");
+                }
+                else
+                {
+                    WriteLine($"{item.MenuItem_Name} was not deleted. \n."
+                                +"Returning to menu navigation.");
+                }
+            }
+        }
+        catch
+        {
+                    WriteLine($"The menu item could not be deleted. \n."
+                                +"Try confirming this is the item you are looking for.");
+        }
+
+        ReadKey();
+    }
+
+
+//* Edit an Entree Methods
 private void ListEntreesToEdit()
     {
         List<EntreeItem_A_La_Cart> entreesInDb = _menuRepo.GetAllEntrees();
@@ -421,7 +540,7 @@ private void EditAnEntree()
         ReadKey();
     }
 private EntreeItem_A_La_Cart EditEntreeInput()
-{   try {
+    {   try {
         Clear();
         ForegroundColor = ConsoleColor.DarkGreen;
         WriteLine("\n" 
@@ -465,4 +584,5 @@ private EntreeItem_A_La_Cart EditEntreeInput()
             }
 
     }
+
 }
