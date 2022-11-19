@@ -315,7 +315,7 @@ private void DisplayEntree_RemoveOptions(List<EntreeItem_A_La_Cart> entreesInDb)
         {
             foreach (EntreeItem_A_La_Cart item in entreesInDb)
             {
-            WriteLine($" {item.MenuItem_Name}   {item.MenuItem_Price}");
+            WriteLine($" {item.MenuItem_ID}  ===== {item.MenuItem_Name} =====  {item.MenuItem_Price}");
             }
             Console.ForegroundColor = ConsoleColor.DarkMagenta; 
             WriteLine("Enter the name of the entree you want to remove");
@@ -373,7 +373,7 @@ private void DisplayEntree_EditOptions(List<EntreeItem_A_La_Cart> entreesInDb)
             foreach (EntreeItem_A_La_Cart item in entreesInDb)
             {
             Console.ForegroundColor = ConsoleColor.DarkYellow;
-            WriteLine($" {item.MenuItem_ID}     {item.MenuItem_Name}   {item.MenuItem_Price} "); ResetColor();
+            WriteLine($" {item.MenuItem_ID} ===== {item.MenuItem_Name} =====  {item.MenuItem_Price} "); ResetColor();
             WriteLine(       $"{item.MenuItem_Description} \n");                                 Console.ForegroundColor = ConsoleColor.DarkGreen; 
             WriteLine("===============================================================");        ResetColor();
             }
@@ -430,19 +430,24 @@ private EntreeItem_A_La_Cart EditEntreeInput()
             "                                                    Update Menu Options                                            \n"); 
         ResetColor();      
         EntreeItem_A_La_Cart updatedEntree = new EntreeItem_A_La_Cart();
-        
-        ForegroundColor = ConsoleColor.DarkMagenta;
-        WriteLine("Update the description for the new Entree:");
-        ResetColor();
-        updatedEntree.MenuItem_Name = ReadLine();
 
         ForegroundColor = ConsoleColor.DarkMagenta;
-        WriteLine("Update the description for the new Entree:");
+        WriteLine("Enter the Menu Number for the Entree:");
+        ResetColor();
+        updatedEntree.MenuItem_ID = int.Parse(ReadLine());
+
+        ForegroundColor = ConsoleColor.DarkMagenta;
+        WriteLine("Update the Name for the Entree:");
         ResetColor();
         updatedEntree.MenuItem_Description = ReadLine();
 
         ForegroundColor = ConsoleColor.DarkMagenta;
-        WriteLine("Enter a price (0.00) for the new Entree:");
+        WriteLine("Update the description for the Entree:");
+        ResetColor();
+        updatedEntree.MenuItem_Description = ReadLine();
+
+        ForegroundColor = ConsoleColor.DarkMagenta;
+        WriteLine("Enter a new price (0.00) for the Entree:");
         ResetColor();
 
 		string userInput;
