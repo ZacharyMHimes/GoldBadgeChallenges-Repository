@@ -12,7 +12,7 @@
             "program": "${workspaceFolder}/ChallengeTwo_UI/bin/Debug/net6.0/chalengeTwo_UI.dll",
             "args": [],
             "cwd": "${workspaceFolder}/ChallengeTwo_UI",
-            "console": "internalConsole",
+            "console": "integratedTerminal",
             "stopAtEntry": false
         },
         {

@@ -1,2 +1,2 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿Delivery_UI UI = new Delivery_UI();
+UI.Run();
