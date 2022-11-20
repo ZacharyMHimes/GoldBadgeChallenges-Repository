@@ -5,7 +5,16 @@ public Delivery()
 {
 
 }
-public Delivery(int id, DateTime orderDate, DateTime deliveryDate, string itemNumber, int itemQuantity, int customerId, int orderStatus) 
+public Delivery
+    (
+        int id, 
+        DateTime orderDate, 
+        DateTime deliveryDate, 
+        string itemNumber, 
+        int itemQuantity, 
+        int customerId, 
+        int orderStatus
+    ) 
     {
         Id = id;    
         OrderDate = orderDate;

@@ -33,9 +33,12 @@ private void DisplayMainMenu()
             + "                                                                                                                \n"
             + "     1. View Deliveries in Sequence                                                6. Do a little dance         \n"
             + "     2. List Deliveries by Status                                                  7. Make a little love        \n" 
-            + "     3. Update Delivery Status                                                     8. Get down tonight          \n" 
-            + "     4. Cancel a Delivery                                                          9. ------------              \n" 
-            + "     5. -----------------------                                                    10.Application Sign Out      \n" 
+            + "     3. Add a Delivery                                                             8. Get down tonight          \n" 
+            + "     4. Update Delivery Status                                                     9. ------------              \n" 
+            + "     5. Delete a Delivery                                                         10.Application Sign Out       \n"   // I think Delete my be superfluous - unless it's to cancel 
+            + "                                                                                                                \n"   // deliveries that don't need to be tracked in the future
+            + "                                                                                                                \n"
+            + "                                                                                                                \n"
             + "                                                                                                                \n"); 
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             System.Console.WriteLine("\n"
@@ -52,6 +55,17 @@ private void DisplayMainMenu()
                 case "2":
                     Console.Clear();
                     DeliveryStatusMenu();
+                    break;
+                case "3":
+                    Console.Clear();
+                    AddADelivery();
+                    break;
+                case "4":
+                    Console.Clear();
+                    //ListDeliveriesToDelete();
+                    break;
+                case "5":
+                    Console.Clear();
                     break;
                 case "10":
                     Console.Clear();
@@ -156,7 +170,74 @@ private void DisplayDeliveryInfo(List<Delivery> delivsInDb) //todo: Question For
         }
     }
 
+//* Add a Delivery Methods
+private void AddADelivery()
+    {
+        Console.Clear();
+        try
+        {
+            Delivery deliv = DeliveryUserInput();
+            if (_delivRepo.AddDeliveryToDb(deliv))
+            {
+                Console.ForegroundColor = ConsoleColor.DarkCyan; 
+                WriteLine($"Delivery Number: {deliv.Id} Item Number: {deliv.ItemNumber} has been scheduled for delivery to:");
+                WriteLine($"Customer Number: {deliv.CustomerId} on {deliv.DeliveryDate}");
+                ResetColor();
+                ReadKey();
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                WriteLine("Delivery Could Not be added. Returning to Main");
+                ReadKey();
+            }
+        }
+        catch
+        {
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            WriteLine("Delivery Could Not be added. Returning to Main");
+            ReadKey();
+        }
+        
+    }
 
+private Delivery DeliveryUserInput()
+    {   Delivery deliv = new Delivery();
+        Console.ForegroundColor = ConsoleColor.DarkGreen;
+        System.Console.WriteLine("\n" 
+            + "                                                                                                                \n" 
+            + "                                   Warner Transit Delivery Management Application                               \n");  Console.ForegroundColor = ConsoleColor.DarkYellow;System.Console.WriteLine(
+            "                                                New Delivery Entry                                                \n"
+            + "                                                                                                                \n"
+            + "                                                                                                                \n"
+            + "                                                                                                                \n" 
+            + "                                                                                                                \n" 
+            + "                                                                                                                \n"); 
+        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+        WriteLine("Enter the Delivery Item Number"); ResetColor();
+        deliv.ItemNumber = ReadLine();
+
+        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+        WriteLine("Enter the Item Quantity"); ResetColor();
+        deliv.ItemQuantity = int.Parse(ReadLine());
+
+        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+        WriteLine("Enter the 6 digit customer Id (000000)"); ResetColor();
+        deliv.CustomerId = int.Parse(ReadLine());
+
+        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+        WriteLine("Enter the expected delivery date (month/day/year)"); ResetColor();
+        deliv.DeliveryDate = DateTime.Parse(ReadLine()); 
+
+        DateTime orderDate = DateTime.Now;
+        deliv.OrderDate = orderDate;
+        deliv.OrderStatus = 3;
+
+        return deliv;
+    }
+
+
+//* 
 
 //* Delivery by Status Methods
 private void DeliveryStatusMenu()
