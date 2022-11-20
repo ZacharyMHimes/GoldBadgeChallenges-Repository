@@ -1,0 +1,103 @@
+For this assignment, you will create a C#/.NET Console Application that follows the Repository Pattern, using a type of ICollection or IEnumerable (such as a List, Dictionary or Queue) as a mock database. You will need the repository itself, a User Interface that uses the Console to allow for user interaction with the repository, and a set of Unit Tests.
+
+You should have been given a repository challenge as a morning challenge to complete the POCO and repository classes.
+
+If not, then choose one of the options at the bottom.
+
+ 
+
+Format
+You will turn in a GitHub link to a repository that contain a single C# solution with 3 Projects:
+
+1. Class Library with a POCO and a Repository class
+
+POCO: 
+
+Basic object to be contained in a collection 
+Has properties
+Repository: 
+
+Contains a collection of items (in a List, Dictionary or Queue)
+Has CRUD methods to interact with the collection
+Can have properties/fields of its own
+2. A Console App with a ProgramUI class
+
+Program.cs creates an instance of ProgramUI and runs it
+
+ProgramUI has Console methods to interact with repo
+
+3. A Unit Test Project with a Unit Test class (or a few)
+
+Test Class has test methods to test Repo CRUD methods (for instance, get an item from the repo, assert that it was retrieved correctly)
+
+ 
+
+ 
+
+Options
+
+You can choose from any of the following options (these should be the same as the morning challenge):
+
+ 
+
+Delivery Service 
+Warner Transit Federal is finally going electronic with their delivery tracking. They need an electronic record of current and past deliveries 
+
+Repo type: List 
+
+You need to build an app that will (repo methods): 
+
+Add a new delivery to the history (Create)
+List all en route deliveries, and all completed deliveries (Read)
+Update the status of a delivery (Update)
+Cancel a delivery (Delete)
+Each delivery will need (POCO): 
+
+The order date 
+The delivery date 
+The status of the order (Scheduled, EnRoute, Complete, or Canceled)
+The Item number
+The item quantity
+The customer ID (you can assume every customer has an account with a unique ID number of some kind)
+ 
+
+Address Book 
+Lowell Organization Logistics needs a convenient way to track delivery drivers' contact info that can be used in conjunction with some other software they already have. They need a repository to hold contact info, as well as a console application that can add, retrieve, modify, or remove information. In case they want to make changes or experience bugs, they also want some Unit Tests to make sure the repository is still functioning correctly.
+
+Repo Type: Dictionary 
+
+Each Contact will need (POCO): 
+
+ID (a unique integer, used as the dictionary key - there are many ways to ensure these are unique, pick any you like) 
+Name 
+Address
+Email
+Phone Number 
+The app will need to (repo methods): 
+
+Add a contact (C) 
+List all contacts (R)
+Get contact(s) by Name (R)
+Edit contact by ID (U)
+Remove contact by ID (D) 
+ 
+
+Insurance Claims
+[Company Name] needs insurance claims to be processed in the order in which they are filed. Komodo allows an insurance claim to be made up to 30 days after an incident took place. If the claim is not in the proper time limit, it is not valid.
+
+Repo Type: Queue
+
+Each Claim will need (POCO): 
+
+ClaimType (Car, Home, or Theft)
+Description
+ClaimAmount
+DateOfIncident
+DateOfClaim
+IsValid (based on the date of the claim and the date of the incident)
+The app will need to (repo methods): 
+
+Add a new claim (C)
+View the next claim (R)
+See a list of all claims (R)
+Process (remove) the next claim (D)
