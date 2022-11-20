@@ -209,14 +209,8 @@ private Order OrderInput()
                         DisplayEntrees(auxEntrees);
                         var selectedEntree = int.Parse(ReadLine());
                         EntreeItem_A_La_Cart entree = _MenuRepo.GetEntreeById(selectedEntree);
-                        if (selectedEntree != null)
-                        {
-                            order.Entree.Add(entree);//todo figure out why app closes at this moment
-                        }
-                        else
-                        {
-                            WriteLine($"Sorry, {selectedEntree} can not be ordered.");
-                        }
+
+                        order.Entree.Add(entree);//todo figure out why app closes at this moment
                     }
                     else
                     {

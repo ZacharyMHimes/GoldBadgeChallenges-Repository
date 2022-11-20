@@ -1,0 +1,19 @@
+Address Book 
+Lowell Organization Logistics needs a convenient way to track delivery drivers' contact info that can be used in conjunction with some other software they already have. They need a repository to hold contact info, as well as a console application that can add, retrieve, modify, or remove information. In case they want to make changes or experience bugs, they also want some Unit Tests to make sure the repository is still functioning correctly.
+
+Repo Type: Dictionary 
+
+Each Contact will need (POCO): 
+
+ID (a unique integer, used as the dictionary key - there are many ways to ensure these are unique, pick any you like) 
+Name 
+Address
+Email
+Phone Number 
+The app will need to (repo methods): 
+
+Add a contact (C) 
+List all contacts (R)
+Get contact(s) by Name (R)
+Edit contact by ID (U)
+Remove contact by ID (D) 
