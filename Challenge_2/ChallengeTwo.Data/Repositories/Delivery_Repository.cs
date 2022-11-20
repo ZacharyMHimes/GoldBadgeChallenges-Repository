@@ -34,16 +34,20 @@ public List<Delivery> GetAllDeliveries()
     {
         return _deliveryDb;
     }
-
-public Delivery GetDeliveryByStatus(int orderStatus)
+public Delivery GetDeliveryById(int id)
     {  
         foreach (Delivery deliv in _deliveryDb)
         {
-            if(deliv.OrderStatus == orderStatus)
+            if(deliv.Id == id)
             return deliv;
-
         }
         return null;
+    }
+//todo Delete:
+public bool DeleteDelivery(int devId)
+    {
+        Delivery delivInDb = GetDeliveryById(devId);
+        return _deliveryDb.Remove(delivInDb);
     }
 //todo Seed Data:
 private void SeedData()

@@ -50,7 +50,7 @@ private void DisplayMainMenu()
             {
                 case "1":
                     Console.Clear();
-                    ViewDeliveriesInSequence();
+                    ViewDeliveries();
                     break;
                 case "2":
                     Console.Clear();
@@ -66,6 +66,7 @@ private void DisplayMainMenu()
                     break;
                 case "5":
                     Console.Clear();
+                    DeleteADelivery();
                     break;
                 case "10":
                     Console.Clear();
@@ -81,7 +82,7 @@ private void DisplayMainMenu()
     
     }
 //* Deliveries in Sequence Methods
-private void ViewDeliveriesInSequence()
+private void ViewDeliveries()
     {
         List<Delivery> delivsInDb = _delivRepo.GetAllDeliveries();
         DisplayDeliveryInfo(delivsInDb);
@@ -200,7 +201,6 @@ private void AddADelivery()
         }
         
     }
-
 private Delivery DeliveryUserInput()
     {   Delivery deliv = new Delivery();
         Console.ForegroundColor = ConsoleColor.DarkGreen;
@@ -237,9 +237,11 @@ private Delivery DeliveryUserInput()
     }
 
 
-//* 
-
-//* Delivery by Status Methods
+//* Delivery by Status Report Menu
+//                             I realized after building this byzantine methodology 
+//                          I could've used LINQ to return lists of deliveries by status,
+//                         which would've smoothed out the code in the the UI....
+//                          but this set up is consistent and free of bugs. 
 private void DeliveryStatusMenu()
         {   Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkGreen;
@@ -292,51 +294,6 @@ private void DeliveryStatusMenu()
                     break;
         }
     }
-//
-// private void ViewDeliveryByStatus()
-//     {
-//         List<Delivery> delivsInDb = _delivRepo.GetAllDeliveries();
-//         DisplayDeliveryByStatus(delivsInDb);
-//     }
-// private void DisplayDeliveryByStatus(List<Delivery> delivsInDb)
-//     {   Console.Clear();
-//         Console.ForegroundColor = ConsoleColor.DarkGreen;
-//             System.Console.WriteLine("\n" 
-//             + "                                                                                                                \n" 
-//             + "                                   Warner Transit Delivery Management Application                              ");  Console.ForegroundColor = ConsoleColor.DarkYellow;  System.Console.WriteLine(
-//             "                                                    Current Deliveries Status                                            \n"); 
-//         ResetColor(); 
-//         Console.ForegroundColor = ConsoleColor.DarkMagenta; 
-//         WriteLine("____________________ Completed Deliveries _________________________");
-
-//             foreach(Delivery deliv in delivsInDb)
-//                 {
-//                     GetDelivery(deliv.OrderStatus);
-//                     for (deliv.OrderStatus = 1){
-//                             WriteLine($" Order Number:{deliv.Id}   Ordered On:{deliv.OrderDate} Status:"); 
-//                             Console.ForegroundColor = ConsoleColor.DarkMagenta;
-//                             WriteLine($" Delivery Completed on {deliv.DeliveryDate}"); ResetColor();}
-                            
-//                     for (deliv.OrderStatus = 2)
-//                         {
-//                             WriteLine($" Order Number:{deliv.Id}   Ordered On:{deliv.OrderDate} Status:"); 
-//                             Console.ForegroundColor = ConsoleColor.DarkMagenta;
-//                             WriteLine($" Out For Delivery, Expected {deliv.DeliveryDate}"); ResetColor();
-//                         };
-//                     for (deliv.OrderStatus = 3)
-//                         {
-//                             WriteLine($" Order Number:{deliv.Id}   Ordered On:{deliv.OrderDate} Status:"); 
-//                             Console.ForegroundColor = ConsoleColor.Magenta;
-//                             WriteLine($" Delivery Scheduled, Expected {deliv.DeliveryDate}"); ResetColor();
-//                         };
-//                     for (deliv.OrderStatus = 4)
-//                         {
-//                             WriteLine($" Order Number:{deliv.Id}   Ordered On:{deliv.OrderDate} Status:"); 
-//                             Console.ForegroundColor = ConsoleColor.DarkRed;
-//                             WriteLine($" Delivery Cancelled"); ResetColor();
-//                         };
-//                 }
-//     }
 //* DeliveryReportingMethods
 private void ListCompletedDeliveries()
     {   Console.ForegroundColor = ConsoleColor.DarkGreen; 
@@ -406,5 +363,45 @@ private void ListCancelledDeliveries()
         DeliveryStatusMenu();
     }  
 
+//* Delete Delivery Methods
+private void DeleteADelivery()
+    {
+        Clear();
+        ViewDeliveries();
+        WriteLine("----------\n");
+        try
+        {   Console.ForegroundColor = ConsoleColor.DarkYellow;
+            WriteLine("Select Delivery by Id."); ResetColor();
+            int userInputId = int.Parse(ReadLine());
+            ConfirmSelectionId(userInputId);
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            WriteLine($"Do you want to remove Delivery {userInputId} from the Record? y/n?"); ResetColor();
+            string userInputDeleteDev = ReadLine();
+            if (userInputDeleteDev == "Y".ToLower())
+            {
+                if (_delivRepo.DeleteDelivery(userInputId))
+                {   Console.ForegroundColor = ConsoleColor.DarkCyan; 
+                    WriteLine($" Delivery Number: {userInputId}, was Successfully Deleted.");
+                    ResetColor();
+                }
+                else
+                {   Console.ForegroundColor = ConsoleColor.DarkRed;
+                    WriteLine($"Could not delete Delivery Number: {userInputId}.");
+                    ResetColor();
+                }
+            }
+        }
+        catch
+        {   Console.ForegroundColor = ConsoleColor.DarkRed;
+            WriteLine("Sorry, could not complete request.");
+            ResetColor();
+        }
+
+        ReadKey();
+    }
+private void ConfirmSelectionId(int userInputId)
+        {
+            Delivery delivSelection = _delivRepo.GetDeliveryById(userInputId);
+        }
 }
 
