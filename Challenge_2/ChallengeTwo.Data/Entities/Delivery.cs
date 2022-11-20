@@ -5,14 +5,14 @@ public Delivery()
 {
 
 }
-public Delivery(int id, DateTime orderDate, string itemNumber, int itemQuantity, int customerId, int orderStage) 
+public Delivery(int id, DateTime orderDate, string itemNumber, int itemQuantity, int customerId, int orderStatus) 
     {
         Id = id;    
         OrderDate = orderDate;
         ItemNumber = itemNumber;
         ItemQuantity = itemQuantity;
         CustomerId = customerId;
-        OrderStage = orderStage;
+        OrderStatus = orderStatus;
     }
 
 
@@ -21,10 +21,6 @@ public DateTime OrderDate {get; set;}
 public DateTime DeliveryDate {get; set;}
 public string ItemNumber {get; set;}
 public int ItemQuantity {get; set;} 
-public int CustomerId;
-public int OrderStage;
-public enum OrderStatus
-    {
-    complete, enRoute, scheduled, cancelled
-    }
+public int CustomerId {get; set;}
+public int OrderStatus {get; set;}
 }
