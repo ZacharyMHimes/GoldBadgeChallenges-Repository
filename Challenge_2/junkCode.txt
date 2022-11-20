@@ -1,0 +1,65 @@
+// private void PrintCompletedDeliveries()
+//     {
+//         foreach()
+//     }
+// private void ListEnRouteDeliveries()
+//     {   int orderStatus = 2;
+//         Delivery delivery = _delivRepo.GetDeliveriesByStatus(orderStatus);
+//         PrintEnRouteDeliveries();
+//     }
+
+// private void ListScheduledDeliveries()
+//     {   int orderStatus = 3;
+//         Delivery delivery = _delivRepo.GetDeliveriesByStatus(orderStatus);
+//         PrintScheduledDeliveries();
+//     }
+
+// private void ListCancelledDeliveries()
+//     {   int orderStatus = 4;
+//         Delivery delivery = _delivRepo.GetDeliveriesByStatus(orderStatus);
+//         PrintCancelledDeliveries();
+//     }
+// private void DisplayDeliveriesCompleted(List<Delivery> delivsInDb)
+//     {   Console.Clear();
+//         Console.ForegroundColor = ConsoleColor.DarkGreen;
+//             System.Console.WriteLine("\n" 
+//             + "                                                                                                                \n" 
+//             + "                                   Warner Transit Delivery Management Application                              ");  Console.ForegroundColor = ConsoleColor.DarkYellow;  System.Console.WriteLine(
+//             "                                                    Current Deliveries Status                                            \n"); 
+//         ResetColor(); 
+//         Console.ForegroundColor = ConsoleColor.DarkMagenta; 
+//         WriteLine("____________________ Completed Deliveries _________________________");
+
+//             foreach(Delivery deliv in delivsInDb)
+//                 {
+//                     switch(deliv.OrderStatus)
+//                     case (deliv.OrderStatus = 1){
+//                             WriteLine($" Order Number:{deliv.Id}   Ordered On:{deliv.OrderDate} Status:"); 
+//                             Console.ForegroundColor = ConsoleColor.DarkMagenta;
+//                             WriteLine($" Delivery Completed on {deliv.DeliveryDate}"); ResetColor();}
+                            
+//                     for (deliv.OrderStatus = 2)
+//                         {
+//                             WriteLine($" Order Number:{deliv.Id}   Ordered On:{deliv.OrderDate} Status:"); 
+//                             Console.ForegroundColor = ConsoleColor.DarkMagenta;
+//                             WriteLine($" Out For Delivery, Expected {deliv.DeliveryDate}"); ResetColor();
+//                         };
+//                     for (deliv.OrderStatus = 3)
+//                         {
+//                             WriteLine($" Order Number:{deliv.Id}   Ordered On:{deliv.OrderDate} Status:"); 
+//                             Console.ForegroundColor = ConsoleColor.Magenta;
+//                             WriteLine($" Delivery Scheduled, Expected {deliv.DeliveryDate}"); ResetColor();
+//                         };
+//                     for (deliv.OrderStatus = 4)
+//                         {
+//                             WriteLine($" Order Number:{deliv.Id}   Ordered On:{deliv.OrderDate} Status:"); 
+//                             Console.ForegroundColor = ConsoleColor.DarkRed;
+//                             WriteLine($" Delivery Cancelled"); ResetColor();
+//                         };
+//                 }
+//     }
+// private Delivery GetDelivery(int deliveryStatus)
+//     {
+//         return _delivRepo.GetDeliveriesByStatus(deliveryStatus);
+        
+//     }

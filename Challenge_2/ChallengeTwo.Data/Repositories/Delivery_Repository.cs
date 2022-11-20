@@ -35,26 +35,52 @@ public List<Delivery> GetAllDeliveries()
         return _deliveryDb;
     }
 
-public Delivery GetDeliveriesByStatus(int orderStatus)
-    {
-        return _deliveryDb.SingleOrDefault(deliv => deliv.OrderStatus == orderStatus);
+public Delivery GetDeliveryByStatus(int orderStatus)
+    {  
+        foreach (Delivery deliv in _deliveryDb)
+        {
+            if(deliv.OrderStatus == orderStatus)
+            return deliv;
+
+        }
+        return null;
     }
 //todo Seed Data:
 private void SeedData()
     {
-    var delivery1 = new Delivery( _count,DateTime.Now, "DBX12345", 1, 111111, 1 );
-    var delivery2 = new Delivery( _count,DateTime.Now, "DBX12346", 3, 111112, 2 );
-    var delivery3 = new Delivery( _count,DateTime.Now, "DBX12347", 82, 111113, 4 );
+        DateTime orderDate1 = new DateTime(2021, 12, 31);
+        DateTime orderDate2 = new DateTime(2022, 8, 7);
+        DateTime orderDate3 = new DateTime(2022, 11, 9);
+        DateTime orderDate4 = new DateTime(2022, 11, 9);
+        DateTime orderDate5 = new DateTime(2022, 11, 12);
+        DateTime orderDate6 = new DateTime(2022, 11, 13);
 
-    AddDeliveryToDb(delivery1);
-    AddDeliveryToDb(delivery2);
-    AddDeliveryToDb(delivery3);
+        DateTime deliveryDate1 = new DateTime();
+        DateTime deliveryDate2 = new DateTime(2022, 7, 18);
+        DateTime deliveryDate3 = new DateTime(2022, 12, 25);
+        DateTime deliveryDate4 = new DateTime(2022, 11, 9);
+        DateTime deliveryDate5 = new DateTime(2022, 11, 14);
+        DateTime deliveryDate7 = new DateTime(2022, 11, 24); 
+    
+        var delivery1 = new Delivery( _count, orderDate1, deliveryDate1, "DMX12345", 1, 111111, 4 );
+        var delivery2 = new Delivery( _count, orderDate2, deliveryDate2, "DMX12346", 3, 111112, 1 );
+        var delivery3 = new Delivery( _count, orderDate3, deliveryDate3, "BgESmZ12347", 82, 111113, 3 );
+        var delivery4 = new Delivery( _count, orderDate4, deliveryDate4, "2PAC12348", 11, 111114, 1 );
+        var delivery5 = new Delivery( _count, orderDate5, DateTime.Now, "Bz2Mn12349", 1, 111113, 2 );
+        var delivery6 = new Delivery( _count, orderDate6, DateTime.Now, "NAZ12350", 6, 111113, 2 );
+        var delivery7 = new Delivery( _count, DateTime.Now, deliveryDate7, "DBX12347", 82, 111113, 3 );
 
-
-
-
-
+        AddDeliveryToDb(delivery1);
+        AddDeliveryToDb(delivery2);
+        AddDeliveryToDb(delivery3);
+        AddDeliveryToDb(delivery4);
+        AddDeliveryToDb(delivery5);
+        AddDeliveryToDb(delivery6);
+        AddDeliveryToDb(delivery7);
     }
+
+
 }
+
 
 
