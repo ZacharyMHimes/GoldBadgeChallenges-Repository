@@ -1,5 +1,9 @@
 Address Book 
-Lowell Organization Logistics needs a convenient way to track delivery drivers' contact info that can be used in conjunction with some other software they already have. They need a repository to hold contact info, as well as a console application that can add, retrieve, modify, or remove information. In case they want to make changes or experience bugs, they also want some Unit Tests to make sure the repository is still functioning correctly.
+Lowell Organization Logistics needs a convenient way to track delivery drivers' 
+contact info that can be used in conjunction with some other software they already have. 
+They need a repository to hold contact info, as well as a console application that can 
+add, retrieve, modify, or remove information. In case they want to make changes or 
+experience bugs, they also want some Unit Tests to make sure the repository is still functioning correctly.
 
 Repo Type: Dictionary 
 
