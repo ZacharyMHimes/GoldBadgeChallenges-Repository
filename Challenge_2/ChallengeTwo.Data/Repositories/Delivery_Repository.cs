@@ -42,10 +42,9 @@ public Delivery GetDeliveriesById(int id)
 //todo Seed Data:
 private void SeedData()
     {
-    var delivery1 = new Delivery( _count,DateTime.Now, "DBX12345", 1, 111111 );
-    var delivery2 = new Delivery( _count,DateTime.Now, "DBX12346", 3, 111112 );
-    var delivery3 = new Delivery( _count,DateTime.Now, "DBX12347", 82, 111113 );
-
+    var delivery1 = new Delivery( _count,DateTime.Now, "DBX12345", 1, 111111, 1 );
+    var delivery2 = new Delivery( _count,DateTime.Now, "DBX12346", 3, 111112, 2 );
+    var delivery3 = new Delivery( _count,DateTime.Now, "DBX12347", 82, 111113, 3 );
 
     AddDeliveryToDb(delivery1);
     AddDeliveryToDb(delivery2);

@@ -1,3 +1,4 @@
+using System.Net.Mail;
 using static System.Console;
 
 public class Delivery_UI
@@ -10,6 +11,31 @@ public Delivery_UI()
         _delivRepo = new Delivery_Repository();
     }
     
+public enum OrderStatus
+    {
+    complete, enRoute, scheduled, cancelled
+    }
+
+public void ProcessOrderStatus(OrderStatus status)
+    {
+        switch(status)
+        {
+        case OrderStatus.complete:
+            System.Console.WriteLine("Order Status: Complete");
+            break;
+
+        case OrderStatus.enRoute:
+            System.Console.WriteLine("Order Status: En Route");
+            break;
+
+        case OrderStatus.scheduled:
+            System.Console.WriteLine("Order Status: En Route");
+            break; 
+        case OrderStatus.cancelled:
+            System.Console.WriteLine("Order Status: En Route");
+            break; 
+        }
+    }
 public bool isRunning = true; 
 public void Run()
     {   while (isRunning == true)
@@ -69,21 +95,50 @@ private void RunApplication()
 private void ListAllDeliveries()
     {
         List<Delivery> delivsInDb = _delivRepo.GetAllDeliveries();
-        DisplayDeliveries_ByStatus(delivsInDb);
+        DisplayDeliveryStatus(delivsInDb);
 
     }
 
-private void DisplayDeliveries_ByStatus(List<Delivery> delivsInDb)
+private void DisplayDeliveryStatus(List<Delivery> delivsInDb)
         {
         if (delivsInDb.Count > 0)
         {
             foreach (Delivery deliv in delivsInDb)
-            {   Console.ForegroundColor = ConsoleColor.DarkRed;  
-                WriteLine($"Delivery Number: ----- {deliv.Id} ----- "); ResetColor();
-                WriteLine($"Order Date: --- {deliv.OrderDate} ---\n"
+            {   
+
+                switch(OrderStatus):
+                case OrderStatus.complete:
+                        Console.ForegroundColor = ConsoleColor.DarkMagenta;  
+                        WriteLine($"Delivery Number: ----- {deliv.Id} ----- "); Console.ForegroundColor = ConsoleColor.DarkGreen; WriteLine("Delivery Complete");
+                        WriteLine($"Order Date: --- {deliv.OrderDate} ---\n"
                         + $"Item Number: {deliv.ItemNumber}      \n"
                         + $"Quantity:  {deliv.ItemQuantity}      \n"
                         + $"Cutsomer ID: --- {deliv.CustomerId} ---");
+                        break;
+                case 2:
+                        Console.ForegroundColor = ConsoleColor.DarkMagenta;  
+                        WriteLine($"Delivery Number: ----- {deliv.Id} ----- "); Console.ForegroundColor = ConsoleColor.DarkGreen; WriteLine("Delivery En Route");
+                        WriteLine($"Order Date: --- {deliv.OrderDate} ---\n"
+                        + $"Item Number: {deliv.ItemNumber}      \n"
+                        + $"Quantity:  {deliv.ItemQuantity}      \n"
+                        + $"Cutsomer ID: --- {deliv.CustomerId} ---");
+                        break;
+                case 3:
+                        Console.ForegroundColor = ConsoleColor.DarkMagenta;  
+                        WriteLine($"Delivery Number: ----- {deliv.Id} ----- "); Console.ForegroundColor = ConsoleColor.DarkGreen; WriteLine("Delivery Scheduled");
+                        WriteLine($"Order Date: --- {deliv.OrderDate} ---\n"
+                        + $"Item Number: {deliv.ItemNumber}      \n"
+                        + $"Quantity:  {deliv.ItemQuantity}      \n"
+                        + $"Cutsomer ID: --- {deliv.CustomerId} ---");
+                        break;
+                case 4:
+                        Console.ForegroundColor = ConsoleColor.DarkMagenta;  
+                        WriteLine($"Delivery Number: ----- {deliv.Id} ----- "); Console.ForegroundColor = ConsoleColor.DarkGreen; WriteLine("Delivery Cancelled");
+                        WriteLine($"Order Date: --- {deliv.OrderDate} ---\n"
+                        + $"Item Number: {deliv.ItemNumber}      \n"
+                        + $"Quantity:  {deliv.ItemQuantity}      \n"
+                        + $"Cutsomer ID: --- {deliv.CustomerId} ---");
+                        break;
             }
             Console.ForegroundColor = ConsoleColor.DarkMagenta; 
             System.Console.WriteLine("Return to Main");
