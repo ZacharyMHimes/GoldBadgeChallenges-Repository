@@ -50,7 +50,7 @@ private void DisplayMainMenu()
             {
                 case "1":
                     Console.Clear();
-                    ViewDeliveries();
+                    ListDeliveries();
                     break;
                 case "2":
                     Console.Clear();
@@ -82,11 +82,22 @@ private void DisplayMainMenu()
     
     }
 //* Deliveries in Sequence Methods
+private void ListDeliveries()
+        {
+            ViewDeliveries();
+            Console.ForegroundColor = ConsoleColor.DarkGray;  
+            WriteLine("______________________________________");
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            System.Console.WriteLine("End of Deliveries Record. Return to Main.");
+            ReadKey(); ResetColor();
+
+        }
 private void ViewDeliveries()
     {
-        List<Delivery> delivsInDb = _delivRepo.GetAllDeliveries();
-        DisplayDeliveryInfo(delivsInDb);
+        List<Delivery> deliveriesRecord = _delivRepo.GetAllDeliveries();
+        DisplayDeliveryInfo(deliveriesRecord);
     }
+
 private void DisplayDeliveryInfo(List<Delivery> delivsInDb) //todo: Question For Terry 
         {                                                   //*  would you stack all of this text in-method, or break it up into
         if (delivsInDb.Count > 0)                           //*  sub-methods (would we call those helper methods?) by case?
@@ -154,19 +165,14 @@ private void DisplayDeliveryInfo(List<Delivery> delivsInDb) //todo: Question For
                                 ResetColor();
                                 break;                          
                         }
-            Console.ForegroundColor = ConsoleColor.DarkGray;  
-            WriteLine("______________________________________");
-            ResetColor();
-            ReadKey();
+                ReadKey();
             }
 
-        Console.ForegroundColor = ConsoleColor.DarkMagenta; 
-        System.Console.WriteLine("Return to Main");
         }
         else
         {
             Console.ForegroundColor = ConsoleColor.DarkRed;
-            System.Console.WriteLine("Something Went Wrong. Return to Main.");
+            System.Console.WriteLine("Something Went Wrong.");
             ReadKey();
         }
     }
@@ -291,6 +297,7 @@ private void DeliveryStatusMenu()
                     WriteLine("Invalid Selection, Please Enter an Integer Value");
                     ResetColor();
                     ReadKey();
+                    DeliveryStatusMenu();
                     break;
         }
     }

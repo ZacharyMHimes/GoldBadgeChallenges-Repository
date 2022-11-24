@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\ChallengeTwo.Data\ChallengeTwo.Data.csproj" />
+    <ProjectReference Include="..\ChallengeTwo_DeliveryService_Data\ChallengeTwo_Data.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

@@ -1,4 +1,4 @@
-
+using static System.Console;
 public class Delivery
 {
 public Delivery()
