@@ -62,7 +62,7 @@ private void DisplayMainMenu()
                     break;
                 case "4":
                     Console.Clear();
-                    //ListDeliveriesToDelete();
+                    UpdateADelivery();
                     break;
                 case "5":
                     Console.Clear();
@@ -112,7 +112,7 @@ private void DisplayDeliveryInfo(List<Delivery> delivsInDb) //todo: Question For
                                 WriteLine($"Order Date: --- {deliv.OrderDate} ---\n"
                                         + $"Item Number: {deliv.ItemNumber}      \n"
                                         + $"Quantity:  {deliv.ItemQuantity}      \n"
-                                        + $"Cutsomer ID: --- {deliv.CustomerId} ---");
+                                        + $"Customer ID: --- {deliv.CustomerId} ---");
                             Console.ForegroundColor = ConsoleColor.DarkGreen; 
                                 WriteLine($"Delivery Complete \n"); 
                                 ResetColor();
@@ -124,7 +124,7 @@ private void DisplayDeliveryInfo(List<Delivery> delivsInDb) //todo: Question For
                                 WriteLine($"Order Date: --- {deliv.OrderDate} ---\n"
                                 + $"Item Number: {deliv.ItemNumber}      \n"
                                 + $"Quantity:  {deliv.ItemQuantity}      \n"
-                                + $"Cutsomer ID: --- {deliv.CustomerId} ---");
+                                + $"Customer ID: --- {deliv.CustomerId} ---");
                             Console.ForegroundColor = ConsoleColor.Green;
                                 WriteLine("Delivery En Route \n"); 
                                 ResetColor();                 
@@ -136,7 +136,7 @@ private void DisplayDeliveryInfo(List<Delivery> delivsInDb) //todo: Question For
                                 WriteLine($"Order Date: --- {deliv.OrderDate} ---\n"
                                 + $"Item Number: {deliv.ItemNumber}      \n"
                                 + $"Quantity:  {deliv.ItemQuantity}      \n"
-                                + $"Cutsomer ID: --- {deliv.CustomerId} ---");
+                                + $"Customer ID: --- {deliv.CustomerId} ---");
 
                             Console.ForegroundColor = ConsoleColor.DarkCyan; 
                                 Write("Delivery Scheduled \n"); 
@@ -148,7 +148,7 @@ private void DisplayDeliveryInfo(List<Delivery> delivsInDb) //todo: Question For
                                 WriteLine($"Order Date: --- {deliv.OrderDate} ---\n"
                                 + $"Item Number: {deliv.ItemNumber}      \n"
                                 + $"Quantity:  {deliv.ItemQuantity}      \n"
-                                + $"Cutsomer ID: --- {deliv.CustomerId} ---");
+                                + $"Customer ID: --- {deliv.CustomerId} ---");
                             Console.ForegroundColor = ConsoleColor.DarkYellow; 
                                 WriteLine("Delivery Cancelled \n"); 
                                 ResetColor();            
@@ -159,7 +159,7 @@ private void DisplayDeliveryInfo(List<Delivery> delivsInDb) //todo: Question For
                                 WriteLine($"Order Date: --- {deliv.OrderDate} ---\n"
                                 + $"Item Number: {deliv.ItemNumber}      \n"
                                 + $"Quantity:  {deliv.ItemQuantity}      \n"
-                                + $"Cutsomer ID: --- {deliv.CustomerId} ---");
+                                + $"Customer ID: --- {deliv.CustomerId} ---");
                             Console.ForegroundColor = ConsoleColor.Red; 
                                 WriteLine("Cannot find Order Status \n");
                                 ResetColor();
@@ -369,6 +369,106 @@ private void ListCancelledDeliveries()
         ReadKey();
         DeliveryStatusMenu();
     }  
+
+//* Update Delivery Methods
+
+private void UpdateADelivery()
+    {
+        Clear();
+        ViewDeliveries();
+        WriteLine("----------\n");
+        try
+        {
+            WriteLine("Select delivery by Id.");
+            int userInputId = int.Parse(ReadLine());
+            Delivery delivInDb = GetDeliveryDetails(userInputId);
+            bool isValidated = ValidateDelivery(delivInDb.Id);
+
+            if (isValidated)
+            {
+                WriteLine("Do you want to Update this Delivery? y/n?");
+                string userInputUpdate = ReadLine();
+                if (userInputUpdate == "Y".ToLower())
+                {
+                    Delivery updatedDelivery = UpdateUserInput();
+
+                    if (_delivRepo.UpdateDelivery(delivInDb.Id, updatedDelivery))
+                    {
+                        WriteLine($" The Delivery: {userInputId}, was updated.");
+                    }
+                    else
+                    {
+                        WriteLine($"The Delivery {userInputId}, was NOT Updated.");
+                    }
+                }
+                else
+                {
+                    WriteLine("Returning to Developer Menu.");
+                }
+            }
+        }
+        catch
+        {
+            
+        }
+        ReadKey();
+    }
+
+private Delivery UpdateUserInput()
+    {   Delivery deliv = new Delivery();
+                                                
+        WriteLine("Enter the Delivery Item Number"); ResetColor();
+        deliv.ItemNumber = ReadLine();
+
+        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+        WriteLine("Enter the Item Quantity"); ResetColor();
+        deliv.ItemQuantity = int.Parse(ReadLine());
+
+        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+        WriteLine("Enter the 6 digit customer Id (000000)"); ResetColor();
+        deliv.CustomerId = int.Parse(ReadLine());
+
+        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+        WriteLine("Enter the expected delivery date (month/day/year)"); ResetColor();
+        deliv.DeliveryDate = DateTime.Parse(ReadLine()); 
+
+        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+        WriteLine("Select a new Order Status \n"
+                    +" 1. Complete   \n"
+                    +" 2. En Route   \n"
+                    +" 3. Scheduled  \n"
+                    +" 4. Cancelled    ");
+                    ResetColor();
+
+        deliv.OrderStatus = int.Parse(ReadLine()); 
+
+        return deliv;
+    }
+
+
+
+
+    private bool ValidateDelivery(int userInputId)
+    {
+        Delivery deliv = GetDeliveryDetails(userInputId);
+        if (deliv != null)
+        {
+            return true;
+        }
+        else
+        {
+            WriteLine($"The Developer with the Id: {userInputId} doesn't Exist!");
+            return false;
+        }
+    }
+
+    private Delivery GetDeliveryDetails(int userInputId)
+    {
+        return _delivRepo.GetDeliveryById(userInputId);
+    }
+
+
+
 
 //* Delete Delivery Methods
 private void DeleteADelivery()
