@@ -1,6 +1,7 @@
 using static System.Console;
 public class Delivery
 {
+//constructors
 public Delivery()
 {
 
@@ -24,8 +25,7 @@ public Delivery
         CustomerId = customerId;
         OrderStatus = orderStatus;
     }
-
-
+//properties
 public int Id {get; set;}
 public DateTime OrderDate {get; set;}
 public DateTime DeliveryDate {get; set;}

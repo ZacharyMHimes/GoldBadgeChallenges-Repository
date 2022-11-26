@@ -1,8 +1,7 @@
 using Microsoft.VisualBasic.CompilerServices;
 using static System.Console;
 public class Delivery_Repository
-{
-        
+{       
     private readonly List<Delivery> _deliveryDb = new List<Delivery>();
     private int _count;
 
@@ -15,7 +14,6 @@ public class Delivery_Repository
     {
         return (deliv is null) ? false : AddToDatabase(deliv);
     }
-
 //helper method -> Create
     private bool AddToDatabase(Delivery deliv)
     {
@@ -44,6 +42,27 @@ public Delivery GetDeliveryById(int id)
         }
         return null;
     }
+//todo Update:
+public bool UpdateDelivery(int id, Delivery newInfo)
+    {
+        Delivery oldInfo = GetDeliveryById(id);
+        
+        if (oldInfo != null)
+        {
+            oldInfo.Id = newInfo.Id;
+            oldInfo.OrderDate = newInfo.OrderDate;
+            oldInfo.CustomerId = newInfo.CustomerId;
+            oldInfo.ItemNumber = newInfo.ItemNumber;
+            oldInfo.ItemQuantity = newInfo.ItemQuantity;
+            oldInfo.DeliveryDate = newInfo.DeliveryDate;
+            oldInfo.OrderStatus = newInfo.OrderStatus;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }    
 //todo Delete:
 public bool DeleteDelivery(int devId)
     {
@@ -83,8 +102,6 @@ private void SeedData()
         AddDeliveryToDb(delivery6);
         AddDeliveryToDb(delivery7);
     }
-
-
 }
 
 

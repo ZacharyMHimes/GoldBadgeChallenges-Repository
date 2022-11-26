@@ -29,7 +29,15 @@ public string Address;
 public string Email;
 public int PhoneNumber;
 
-
-
+public void ToString()
+    {
+        Console.WriteLine
+    (   $"     {Key}             \n"
+    +   $"     {Name}            \n"
+    +   $"     {Address}         \n"
+    +   $"     {Email}           \n"
+    +   $"     {PhoneNumber}      ");
+    return;
+    }
 
 }

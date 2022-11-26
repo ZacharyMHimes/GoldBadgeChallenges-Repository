@@ -3,15 +3,12 @@ using System.Net.Mail;
 using static System.Console;
 
 public class Delivery_UI
-{
-        
+{     
 public Delivery_Repository _delivRepo;
-
 public Delivery_UI()
     {
         _delivRepo = new Delivery_Repository();
     }
-
 public bool isRunning = true; 
 public void Run()
     {   while (isRunning == true)
@@ -44,7 +41,6 @@ private void DisplayMainMenu()
             System.Console.WriteLine("\n"
             + " Please Enter a Menu Number:");
             ResetColor();
-
             var mainMenuNav = ReadLine();
             switch (mainMenuNav)
             {
@@ -90,14 +86,12 @@ private void ListDeliveries()
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             System.Console.WriteLine("End of Deliveries Record. Return to Main.");
             ReadKey(); ResetColor();
-
         }
 private void ViewDeliveries()
     {
         List<Delivery> deliveriesRecord = _delivRepo.GetAllDeliveries();
         DisplayDeliveryInfo(deliveriesRecord);
     }
-
 private void DisplayDeliveryInfo(List<Delivery> delivsInDb) //todo: Question For Terry 
         {                                                   //*  would you stack all of this text in-method, or break it up into
         if (delivsInDb.Count > 0)                           //*  sub-methods (would we call those helper methods?) by case?
@@ -241,8 +235,6 @@ private Delivery DeliveryUserInput()
 
         return deliv;
     }
-
-
 //* Delivery by Status Report Menu
 //                             I realized after building this byzantine methodology 
 //                          I could've used LINQ to return lists of deliveries by status,
@@ -317,8 +309,7 @@ private void ListCompletedDeliveries()
             }
         ReadKey();
         DeliveryStatusMenu();
-    }
-        
+    }       
 private void ListEnRouteDeliveries()
     {   Console.ForegroundColor = ConsoleColor.DarkGreen;
         WriteLine("_____________________ Deliveries En Route _____________________"); ResetColor();
@@ -335,7 +326,6 @@ private void ListEnRouteDeliveries()
         ReadKey();
         DeliveryStatusMenu();
     }  
-
 private void ListScheduledDeliveries()
     {   Console.ForegroundColor = ConsoleColor.DarkGreen; 
         WriteLine("_____________________ Orders Scheduled For Delivery _____________________"); ResetColor();
@@ -352,7 +342,6 @@ private void ListScheduledDeliveries()
         ReadKey();
         DeliveryStatusMenu();
     }   
-
 private void ListCancelledDeliveries()
     {   Console.ForegroundColor = ConsoleColor.DarkRed;
         WriteLine("_____________________ Cancelled Orders _____________________"); ResetColor();
@@ -369,9 +358,7 @@ private void ListCancelledDeliveries()
         ReadKey();
         DeliveryStatusMenu();
     }  
-
 //* Update Delivery Methods
-
 private void UpdateADelivery()
     {
         Clear();
@@ -409,29 +396,27 @@ private void UpdateADelivery()
         }
         catch
         {
-            
+            WriteLine("Returning to Developer Menu.");
         }
         ReadKey();
     }
-
 private Delivery UpdateUserInput()
-    {   Delivery deliv = new Delivery();
-                                                
+    {   Delivery deliv = new Delivery();                                                
         WriteLine("Enter the Delivery Item Number"); ResetColor();
         deliv.ItemNumber = ReadLine();
-
+//
         Console.ForegroundColor = ConsoleColor.DarkMagenta;
         WriteLine("Enter the Item Quantity"); ResetColor();
         deliv.ItemQuantity = int.Parse(ReadLine());
-
+//
         Console.ForegroundColor = ConsoleColor.DarkMagenta;
         WriteLine("Enter the 6 digit customer Id (000000)"); ResetColor();
         deliv.CustomerId = int.Parse(ReadLine());
-
+//
         Console.ForegroundColor = ConsoleColor.DarkMagenta;
         WriteLine("Enter the expected delivery date (month/day/year)"); ResetColor();
         deliv.DeliveryDate = DateTime.Parse(ReadLine()); 
-
+//
         Console.ForegroundColor = ConsoleColor.DarkMagenta;
         WriteLine("Select a new Order Status \n"
                     +" 1. Complete   \n"
@@ -439,16 +424,11 @@ private Delivery UpdateUserInput()
                     +" 3. Scheduled  \n"
                     +" 4. Cancelled    ");
                     ResetColor();
-
+//
         deliv.OrderStatus = int.Parse(ReadLine()); 
-
         return deliv;
     }
-
-
-
-
-    private bool ValidateDelivery(int userInputId)
+private bool ValidateDelivery(int userInputId)
     {
         Delivery deliv = GetDeliveryDetails(userInputId);
         if (deliv != null)
@@ -461,14 +441,10 @@ private Delivery UpdateUserInput()
             return false;
         }
     }
-
-    private Delivery GetDeliveryDetails(int userInputId)
+private Delivery GetDeliveryDetails(int userInputId)
     {
         return _delivRepo.GetDeliveryById(userInputId);
     }
-
-
-
 
 //* Delete Delivery Methods
 private void DeleteADelivery()
@@ -503,7 +479,7 @@ private void DeleteADelivery()
             WriteLine("Sorry, could not complete request.");
             ResetColor();
         }
-
+//        
         ReadKey();
     }
 private void ConfirmSelectionId(int userInputId)

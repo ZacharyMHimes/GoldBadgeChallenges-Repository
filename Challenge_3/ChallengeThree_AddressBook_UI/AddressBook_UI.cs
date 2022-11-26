@@ -86,13 +86,12 @@ private void ListAllContacts()
             "                                             Main Menu Options                                                    \n"); 
         ResetColor();
         Dictionary<int, Contact> _contactsInDb = _addressBook.GetAllContacts();
-                foreach (KeyValuePair<int, Contact> entry in _contactsInDb)
-                {
-                WriteLine($"Address Book Entry: ===== {entry.Key} ====");
-                WriteLine($"{entry.ToString}");
+                foreach (int id in _contactsInDb)
+                    { Contact contact = _contactsInDb[id]}
+                
+                
+                
+                ReadKey();
                 }
             
-
-
-        }
 }
